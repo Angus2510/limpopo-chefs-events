@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
     }
 
     const session = getSession(event, date, campus);
-    if (!session || date < new Date().toLocaleDateString("en-CA")) {
+    if (!session || date < new Date().toISOString().slice(0, 10)) {
       return NextResponse.json(
         { error: "That date or campus is no longer available." },
         { status: 400 },

@@ -40,7 +40,8 @@ const whatsappLink =
   "https://wa.me/27660086821?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20an%20LCA%20event.";
 
 export function EventBooking({ event }: { event: AcademyEvent }) {
-  const hasSessions = event.sessions.length > 0;
+  const today = new Date().toISOString().slice(0, 10);
+  const hasSessions = event.sessions.some((session) => session.date >= today);
   const [open, setOpen] = useState(false);
 
   if (!hasSessions) {
@@ -48,6 +49,7 @@ export function EventBooking({ event }: { event: AcademyEvent }) {
       <Button
         size="sm"
         variant="outline"
+        nativeButton={false}
         render={<a href={whatsappLink} target="_blank" rel="noreferrer" />}
       >
         Ask about next date
@@ -95,6 +97,9 @@ function EventBookingSheet({
 
   const sessions = event.sessions.filter(
     (session) => !campus || session.campus === campus,
+  );
+  const upcomingSessions = sessions.filter(
+    (session) => session.date >= new Date().toISOString().slice(0, 10),
   );
   const selectedSession = event.sessions.find(
     (session) => session.date === date && session.campus === campus,
@@ -268,7 +273,7 @@ function EventBookingSheet({
                 </p>
               ) : (
                 <div className="grid grid-cols-2 gap-2">
-                  {sessions.map((session) => (
+                  {upcomingSessions.map((session) => (
                     <button
                       key={`${session.date}-${session.campus}`}
                       type="button"

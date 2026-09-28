@@ -162,6 +162,7 @@ export default function AdminPage() {
             <Button
               variant="outline"
               className="w-full"
+              nativeButton={false}
               render={<Link href="/" />}
             >
               Back to events
@@ -227,7 +228,7 @@ export default function AdminPage() {
           </p>
         )}
         <div className="overflow-x-auto rounded-lg border border-border">
-          <table className="w-full min-w-[850px] border-collapse text-sm">
+          <table className="w-full min-w-212.5 border-collapse text-sm">
             <thead className="bg-muted/60 text-left text-xs uppercase text-muted-foreground">
               <tr>
                 <th className="px-3 py-2">Event / Date</th>

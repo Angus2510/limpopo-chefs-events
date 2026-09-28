@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { EventBooking } from "@/components/event-booking";
-import { EVENTS, formatDate } from "@/lib/events";
+import { EVENTS } from "@/lib/events";
 
 const whatsappLink =
   "https://wa.me/27660086821?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20an%20LCA%20event.";
@@ -67,6 +67,7 @@ export default function EventsPage() {
             </a>
             <Button
               size="sm"
+              nativeButton={false}
               render={
                 <a href={whatsappLink} target="_blank" rel="noreferrer" />
               }
@@ -83,7 +84,7 @@ export default function EventsPage() {
       </header>
 
       <section id="top" className="w-full border-b border-border bg-white">
-        <div className="relative h-48 w-full overflow-hidden sm:h-64 md:h-80 lg:h-[26rem]">
+        <div className="relative h-48 w-full overflow-hidden sm:h-64 md:h-80 lg:h-104">
           <Image
             src="/short-course-banner-new.jpg"
             alt="Limpopo Chefs Academy culinary workshops and short courses"
@@ -153,7 +154,7 @@ export default function EventsPage() {
               <div className="mt-4 flex items-center justify-between border-t border-border px-4 py-3">
                 <span className="text-sm text-muted-foreground">
                   {event.sessions.length
-                    ? formatDate(event.sessions[0]!.date)
+                    ? "See available dates"
                     : "Next date to be announced"}
                 </span>
                 <EventBooking event={event} />
