@@ -19,7 +19,9 @@ export default async function PaymentSuccessPage({
 }) {
   const { ref } = await searchParams;
   let booking = ref
-    ? await prisma.booking.findUnique({ where: { clientReferenceId: ref } })
+    ? await prisma.eventBooking.findUnique({
+        where: { clientReferenceId: ref },
+      })
     : null;
 
   if (
@@ -46,7 +48,7 @@ export default async function PaymentSuccessPage({
           checkout.paymentId ?? booking.yocoCheckoutId,
           checkout.amount,
         );
-        booking = await prisma.booking.findUnique({
+        booking = await prisma.eventBooking.findUnique({
           where: { id: booking.id },
         });
       }

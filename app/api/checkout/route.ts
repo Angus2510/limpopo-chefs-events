@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
 
     const capacity = choice?.capacity ?? session.capacity;
     const pendingSince = new Date(Date.now() - 20 * 60 * 1000);
-    const existing = await prisma.booking.aggregate({
+    const existing = await prisma.eventBooking.aggregate({
       _sum: { participants: true },
       where: {
         eventId,
@@ -120,7 +120,7 @@ export async function POST(request: NextRequest) {
     const pricePerPerson = choice?.price ?? event.price;
     const amount = Math.round(pricePerPerson * participants * 100);
     const clientReferenceId = randomUUID();
-    const booking = await prisma.booking.create({
+    const booking = await prisma.eventBooking.create({
       data: {
         firstName,
         lastName,
@@ -185,7 +185,7 @@ export async function POST(request: NextRequest) {
         redirectUrl?: string;
       };
       if (!yocoResponse.ok || !checkout.id || !checkout.redirectUrl) {
-        await prisma.booking.update({
+        await prisma.eventBooking.update({
           where: { id: booking.id },
           data: { status: "failed" },
         });
@@ -198,13 +198,13 @@ export async function POST(request: NextRequest) {
         );
       }
 
-      await prisma.booking.update({
+      await prisma.eventBooking.update({
         where: { id: booking.id },
         data: { yocoCheckoutId: checkout.id },
       });
       return NextResponse.json({ redirectUrl: checkout.redirectUrl });
     } catch (error) {
-      await prisma.booking.update({
+      await prisma.eventBooking.update({
         where: { id: booking.id },
         data: { status: "failed" },
       });

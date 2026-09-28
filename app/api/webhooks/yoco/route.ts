@@ -81,7 +81,7 @@ export async function POST(request: NextRequest) {
   if (!reference || !payload?.id) return NextResponse.json({ received: true });
 
   if (event.type === "payment.succeeded" && payload.currency === "ZAR") {
-    const booking = await prisma.booking.findUnique({
+    const booking = await prisma.eventBooking.findUnique({
       where: { clientReferenceId: reference },
       select: { amount: true },
     });
@@ -89,7 +89,7 @@ export async function POST(request: NextRequest) {
       await confirmPaidBooking(reference, payload.id, payload.amount);
     }
   } else if (event.type === "payment.failed") {
-    await prisma.booking.updateMany({
+    await prisma.eventBooking.updateMany({
       where: { clientReferenceId: reference, status: "pending" },
       data: { status: "failed" },
     });

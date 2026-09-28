@@ -20,7 +20,7 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Booking setup
 
-Copy `.env.example` to `.env.local` and configure PostgreSQL, Yoco, Resend, and admin credentials. Use a dedicated database for this events application; it does not share booking records with the short-courses app.
+Copy `.env.example` to `.env.local` and configure PostgreSQL, Yoco, Resend, and admin credentials. If you want events and short courses in the same PostgreSQL database, use the short-courses database URLs here too. Events are stored only in the `event_bookings` table; short-course bookings remain in their existing `Booking` table.
 
 Apply the database schema with `pnpm exec prisma migrate deploy`, then run the app with `pnpm dev`. Configure the Yoco webhook URL as `/api/webhooks/yoco` and set its signing secret in `YOCO_WEBHOOK_SECRET`. Paid bookings are confirmed by the signed webhook or by verifying the Yoco checkout on the return page.
 

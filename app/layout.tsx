@@ -11,7 +11,7 @@ const jost = Jost({
 export const metadata: Metadata = {
   title: "Events | Limpopo Chefs Academy",
   description:
-    "Discover culinary events, workshops, and experiences at Limpopo Chefs Academy.",
+    "Discover culinary events, functions, and workshops at Limpopo Chefs Academy.",
 };
 
 export default function RootLayout({

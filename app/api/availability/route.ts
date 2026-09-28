@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export async function GET() {
   const pendingSince = new Date(Date.now() - 20 * 60 * 1000);
-  const bookings = await prisma.booking.findMany({
+  const bookings = await prisma.eventBooking.findMany({
     where: {
       OR: [
         { status: "paid" },

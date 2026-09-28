@@ -6,20 +6,20 @@ export async function confirmPaidBooking(
   paymentId: string,
   amount?: number,
 ) {
-  const pending = await prisma.booking.findUnique({
+  const pending = await prisma.eventBooking.findUnique({
     where: { clientReferenceId: reference },
   });
   if (!pending || pending.status !== "pending") return pending;
   if (amount !== undefined && amount !== pending.amount) return pending;
 
-  const updated = await prisma.booking.updateMany({
+  const updated = await prisma.eventBooking.updateMany({
     where: { id: pending.id, status: "pending" },
     data: { status: "paid", yocoPaymentId: paymentId },
   });
   if (updated.count === 0)
-    return prisma.booking.findUnique({ where: { id: pending.id } });
+    return prisma.eventBooking.findUnique({ where: { id: pending.id } });
 
-  const booking = await prisma.booking.findUnique({
+  const booking = await prisma.eventBooking.findUnique({
     where: { id: pending.id },
   });
   if (booking) await sendBookingConfirmation(booking);

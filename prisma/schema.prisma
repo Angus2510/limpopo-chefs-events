@@ -8,8 +8,8 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-model Booking {
-  id        String   @id @default(cuid())
+model EventBooking {
+  id        String   @id(map: "event_bookings_pkey") @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -30,10 +30,11 @@ model Booking {
   currency String @default("ZAR")
   status   String @default("pending")
 
-  yocoCheckoutId    String? @unique
+  yocoCheckoutId    String? @unique(map: "event_bookings_yocoCheckoutId_key")
   yocoPaymentId     String?
-  clientReferenceId String? @unique
+  clientReferenceId String? @unique(map: "event_bookings_clientReferenceId_key")
 
-  @@index([eventId, date, campus, status])
-  @@index([createdAt])
+  @@index([eventId, date, campus, status], map: "event_bookings_eventId_date_campus_status_idx")
+  @@index([createdAt], map: "event_bookings_createdAt_idx")
+  @@map("event_bookings")
 }

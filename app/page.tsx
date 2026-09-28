@@ -38,7 +38,7 @@ export default function EventsPage() {
                 Limpopo Chefs Academy
               </span>
               <span className="mt-0.5 block text-[10px] text-muted-foreground">
-                Events & Experiences
+                Events & Functions
               </span>
             </span>
           </a>
@@ -86,7 +86,7 @@ export default function EventsPage() {
       <section id="top" className="w-full border-b border-border bg-white">
         <div className="relative h-48 w-full overflow-hidden sm:h-64 md:h-80 lg:h-104">
           <Image
-            src="/short-course-banner-new.jpg"
+            src="/events-banner.jpeg"
             alt="Limpopo Chefs Academy culinary workshops and short courses"
             fill
             priority
@@ -106,7 +106,7 @@ export default function EventsPage() {
               Cook, learn, connect
             </p>
             <h1 className="text-2xl font-bold tracking-tight text-foreground md:text-3xl">
-              Events & experiences
+              Events & Functions
             </h1>
             <p className="mt-1 max-w-2xl text-sm text-muted-foreground sm:text-base">
               Join us in the kitchen for hands-on classes, competitions, and
@@ -175,8 +175,8 @@ export default function EventsPage() {
                 </span>
               </div>
               <p className="max-w-sm text-sm leading-relaxed text-white/55">
-                Culinary experiences, workshops, and gatherings hosted by the
-                leading culinary school in Limpopo.
+                Culinary events, functions, workshops, and gatherings hosted by
+                the leading culinary school in Limpopo.
               </p>
             </div>
             <div>
