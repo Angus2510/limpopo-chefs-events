@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Limpopo Chefs Academy event bookings, backed by PostgreSQL and Yoco checkout.
 
 ## Getting Started
 
@@ -18,7 +18,13 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Booking setup
+
+Copy `.env.example` to `.env.local` and configure PostgreSQL, Yoco, Resend, and admin credentials. Use a dedicated database for this events application; it does not share booking records with the short-courses app.
+
+Apply the database schema with `pnpm exec prisma migrate deploy`, then run the app with `pnpm dev`. Configure the Yoco webhook URL as `/api/webhooks/yoco` and set its signing secret in `YOCO_WEBHOOK_SECRET`. Paid bookings are confirmed by the signed webhook or by verifying the Yoco checkout on the return page.
+
+Set `NEXT_PUBLIC_BASE_URL` to the deployed site origin before accepting live payments. Set a unique `ADMIN_USERNAME` and `ADMIN_PASSWORD`; `ADMIN_PANEL_SECRET` must contain at least 32 characters. The protected booking register is available at `/admin`.
 
 ## Learn More
 
